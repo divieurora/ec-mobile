@@ -1,5 +1,5 @@
 //main.dart
-import 'package:ec_mobile/menu.dart';
+import 'package:ec_mobile/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 void main() {

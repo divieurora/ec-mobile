@@ -1,4 +1,6 @@
+import 'package:ec_mobile/widgets/left_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:ec_mobile/screens/list_form.dart';
 
 class ShopItem {
   final String name;
@@ -44,6 +46,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
         child: Padding(
@@ -90,7 +93,7 @@ class ShopCard extends StatelessWidget {
   final ShopItem item;
 
   const ShopCard(this.item, {super.key}); // Constructor
-m
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -103,6 +106,10 @@ m
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
+          if (item.name == "Tambah Produk") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const FormPage()));
+          }
         },
         child: Container(
           // Container untuk menyimpan Icon dan Text
