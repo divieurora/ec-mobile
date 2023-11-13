@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ec_mobile/widgets/left_drawer.dart';
+import 'package:ec_mobile/list_items.dart';
+import 'package:ec_mobile/globals.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -135,6 +137,8 @@ class _FormPageState extends State<FormPage> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        Item newItem = Item(_name, _amount, _description, _category);
+                        globalListItem.add(newItem);
                         showDialog(
                           context: context,
                           builder: (context) {
@@ -152,11 +156,12 @@ class _FormPageState extends State<FormPage> {
                                   ],
                                 ),
                               ),
-                              actions: [
+                              actions: <Widget>[
                                 TextButton(
                                   child: const Text('OK'),
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    Navigator.of(context).pop();
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ItemPage(items: globalListItem)),);
                                   },
                                 ),
                               ],

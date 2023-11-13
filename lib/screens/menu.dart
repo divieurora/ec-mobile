@@ -1,6 +1,8 @@
 import 'package:ec_mobile/widgets/left_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:ec_mobile/screens/list_form.dart';
+import 'package:ec_mobile/list_items.dart';
+import 'package:ec_mobile/globals.dart';
 
 class ShopItem {
   final String name;
@@ -14,7 +16,7 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<ShopItem> items = [
-    ShopItem("Lihat Item", Icons.checklist, const Color.fromRGBO(125, 110, 131, 1.0)),
+    ShopItem("Daftar Item", Icons.checklist, const Color.fromRGBO(125, 110, 131, 1.0)),
     ShopItem("Tambah Item", Icons.plus_one, const Color.fromRGBO(208, 184, 168, 1.0)),
     ShopItem("Logout", Icons.logout, const Color.fromRGBO(113, 117, 134, 1.0)),
   ];
@@ -109,6 +111,9 @@ class ShopCard extends StatelessWidget {
           if (item.name == "Tambah Item") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const FormPage()));
+          } else if (item.name == "Daftar Item") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ItemPage(items: globalListItem)));
           }
         },
         child: Container(
