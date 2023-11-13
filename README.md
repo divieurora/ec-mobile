@@ -52,7 +52,10 @@
 3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
     Elemen input pada form yang saya pakai pada tugas kali ini adalah `TextFormField` untuk masing-masing _name_, _amount_, _description_, dan _category_. Saya menggunakan `TextFormField` agar _user_ dapat memberi masukan berupa teks yang fleksibel sesuai dengan keinginan.
 4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
-   
+   Flutter menerapkan _clean architecture_ dengan mengedepankan _separation of concerns_ untuk Feature, Domain, dan Data.
+   - Feature Layer: terdiri dari komponen-komponen _user interface_ seperti _widgets, screens,_ dan _views_
+   - Domain Layer: merupakan _innermost_ layer, mendefinisikan _business logic_ aplikasi
+   - Data Layer: merupakan _outermost_ layer yang berguna untuk mengakses data, dapat berbentuk API _calls_ ke server atau _local database_
 6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
    - Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru
      1. Saya membuat file .dart baru untuk Form Tambah Item dengan kode:
