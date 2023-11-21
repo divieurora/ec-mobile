@@ -52,6 +52,97 @@
 3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
     Elemen input pada form yang saya pakai pada tugas kali ini adalah `TextFormField` untuk masing-masing _name_, _amount_, _description_, dan _category_. Saya menggunakan `TextFormField` agar _user_ dapat memberi masukan berupa teks yang fleksibel sesuai dengan keinginan.
 4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
+       Flutter menerapkan _clean architecture_ dengan mengedepankan _separation of concerns_ untuk Feature, Domain, dan Data.
+   - Feature Layer: terdiri dari komponen-komponen _user interface_ seperti _widgets, screens,_ dan _views_
+   - Domain Layer: merupakan _innermost_ layer, mendefinisikan _business logic_ aplikasi
+   - Data Layer: merupakan _outermost_ layer yang berguna untuk mengakses data, dapat berbentuk API _calls_ ke server atau _local database_
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+   - Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru
+     1. Saya membuat file .dart baru untuk Form Tambah Item dengan kode:
+        ```
+        class FormPage extends StatefulWidget {
+          const FormPage({super.key});
+        
+          @override
+          State<FormPage> createState() => _FormPageState();
+        }
+        
+        class _FormPageState extends State<FormPage> {
+          final _formKey = GlobalKey<FormState>();
+          String _name = "";
+          int _amount = 0;
+          String _description = "";
+          String _category = "";
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: const Center(
+                  child: Text(
+                    'Form Tambah Item',
+                  ),
+                ),
+                backgroundColor: Color.fromRGBO(248, 237, 227, 1.0),
+                foregroundColor: Color.fromRGBO(125, 110, 131, 1.0),
+              ),
+              drawer: const LeftDrawer(),
+              body: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(<untuk masing-masing variable>)})))};
+        ```
+     2. Kemudian, mengikuti ketentuan pada Soal Bonus, saya menampilkan data dengan `Dialog` dan juga menampilkan data pada _class_ baru yang dapat diakses dari _widget_ `Lihat Item`
+    - Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama
+     Saya membuat _routing_ dengan memanfaatkan Navigator.push(). Sehingga kode saya adalah sebagai berikut:
+     ```
+     if (item.name == "Tambah Item") {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const FormPage()));
+    }
+     ```
+    - Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru
+      Untuk memunculkan data, saya menggunakan `Dialog` berupa pop-up yang akan muncul ketika tombol Save ditekan pada `FormPage`.
+    - Membuat sebuah drawer pada aplikasi
+      1. Dalam membuat drawer, saya mengikuti langkah-langkah yang ada pada tutorial dengan kode seperti berikut:
+         ```
+         class LeftDrawer extends StatelessWidget {
+          const LeftDrawer({super.key});
+        
+          @override
+          Widget build(BuildContext context) {
+            return Drawer(
+              child: ListView(
+                children: [
+                  const DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(248, 237, 227, 1.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Eurora's Closet",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(125, 110, 131, 1.0),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text("Your Best Look Anytime Anywhere",
+                          style: TextStyle(
+                            color: Color.fromRGBO(125, 110, 131, 1.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListTile(<untuk setiap page>);
+         ```
+      2. Saya kemudian melakukan import ke setiap file .dart yang ingin ditambahkan drawer serta menambahkan: `drawer: const LeftDrawer();`
+<<<<<<< HEAD
    5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
        - Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru
            1. Saya membuat file .dart baru untuk Form Tambah Item dengan kode:
