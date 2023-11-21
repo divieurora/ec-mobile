@@ -66,3 +66,43 @@
             1. Dalam membuat drawer, saya mengikuti langkah-langkah yang ada pada tutorial dengan kode seperti berikut:
                  ```  ```
             2. Saya kemudian melakukan import ke setiap file .dart yang ingin ditambahkan drawer serta menambahkan: `drawer: const LeftDrawer();`
+
+# Tugas 9
+1. Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+
+    Bisa, dan datanya akan muncul sebagai jsonDecode. Namun, pengambilan data JSON tanpa membuat model terlebih dahulu tidak lebih baik daripada membuat model sebelum melakukan pengambilan data JSON karena data tidak diinisiasi secara langsung menjadi object dalam class model.
+2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+
+3. Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+
+4. Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+
+5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+    - `Align`: mensejajarkan posisi dengan _child_-nya dan membuat ukurannya sesuai dengan _child_-nya
+    - `Center`: mengatur _alignment child_ ke bagian tengah
+    - `Column`: membuat _layout child_-nya berarah vertikal
+    - `Container`: membuat posisi, ukuran, dan _layout widget child_-nya serupa
+    - `ListView`: membuat _list_ yang _scrollable_
+    - `ListTile`: membuat _list_ beberapa _tile_
+    - `MaterialPageRoute`: mengarahan _routing_ ke _widget_ lain
+    - `Padding`: mengatur posisi _gap_ di sekitar _child_
+    - `Row`: membuat _layout child_-nya berarah horizontal
+    - `Text`: membuat _text_ dan mengatur propertinya
+    - `TextStyle`: mengatur properti _style_ dari `Text`
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+    - Membuat halaman login pada proyek tugas Flutter.
+        1. Untuk membuat halaman login, pertama adalah mengatur _authentication_ di Django App dengan melakukan `django-admin startapp authentication` kemudian mengatur ke `settings.py`
+        2. Menambahkan `django-cors-headers` ke _depedencies_ dan mengatur _views_ untuk login pada app _authentication_ serta membuat _routing_-nya.
+    - Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+        1. Menginstall _package_ `pbp_django_auth` kemudian memodifikasi _root widget_ menggunakan `CookieRequest` dengan `Provider`
+        2. Membuat file `login.dart` dan mengatur isinya sesuai tutorial.
+    - Membuat model kustom sesuai dengan proyek aplikasi Django.
+        Dari Django App yang sudah di-_deploy_, menyalin data yang ada pada _endpoint_ `JSON` kemudian memanfaatkan website Quicktype untuk membuatnya menjadi file .dart.
+    - Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
+        1. Membuat file baru `list_item.dart` untuk menampilkan _name, amount, description, category,_ dan _image_ dari masing-masing item pada halaman ini. Kurang lebih isi dari file ini mengikuti yang ada pada tutorial.
+        2. Mengatur _routing_ dari _widget_ di `MyHomePage()` ke `Daftar Item` untuk melihat _list_ item yang ada.
+    - Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+        Setelah berhasil menampilkan dan mengatur _routing_, menambahkan tombol untuk kembali ke `MyHomePage()` dengan menambahkan:
+        ```
+
+        ```

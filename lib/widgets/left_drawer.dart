@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ec_mobile/screens/menu.dart';
 import 'package:ec_mobile/screens/list_form.dart';
-import 'package:ec_mobile/list_items.dart';
-import 'package:ec_mobile/globals.dart';
+import 'package:ec_mobile/screens/list_item.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -63,7 +62,7 @@ class LeftDrawer extends StatelessWidget {
             // Bagian redirection ke ItemPage
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ItemPage(items: globalListItem)));
+                  MaterialPageRoute(builder: (context) => const ProductPage()),);
             },
           ),
         ],

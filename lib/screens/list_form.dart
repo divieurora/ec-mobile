@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:ec_mobile/widgets/left_drawer.dart';
-import 'package:ec_mobile/list_items.dart';
-import 'package:ec_mobile/globals.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+
+import '../widgets/inventory_card.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -16,8 +20,10 @@ class _FormPageState extends State<FormPage> {
   int _amount = 0;
   String _description = "";
   String _category = "";
+  String _image = "";
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -135,40 +141,34 @@ class _FormPageState extends State<FormPage> {
                       backgroundColor:
                       MaterialStateProperty.all(Color.fromRGBO(248, 237, 227, 1.0)),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        Item newItem = Item(_name, _amount, _description, _category);
-                        globalListItem.add(newItem);
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Item berhasil tersimpan'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Nama: $_name'),
-                                    Text('Jumlah: $_amount'),
-                                    Text('Deskripsi: $_description'),
-                                    Text('Kategori: $_category'),
-                                  ],
-                                ),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ItemPage(items: globalListItem)),);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                        _formKey.currentState!.reset();
+                        // Kirim ke Django dan tunggu respons
+                        final response = await request.postJson(
+                        "https://lidwina-eurora-tugas.pbp.cs.ui.ac.id/create-flutter/",
+                        jsonEncode(<String, String>{
+                          'name': _name,
+                          'amount': _amount.toString(),
+                          'description': _description,
+                          'category': _category,
+                          'image': _image,
+                        }));
+                        if (response['status'] == 'success') {
+                          ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Item baru berhasil disimpan!"),
+                          ));
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => MyHomePage()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content:
+                            Text("Terdapat kesalahan, silakan coba lagi."),
+                          ));
+                        }
                       }
                     },
                     child: const Text(
