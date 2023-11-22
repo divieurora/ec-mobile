@@ -1,4 +1,6 @@
 import 'package:ec_mobile/screens/menu.dart';
+import 'package:ec_mobile/screens/register.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -106,9 +108,28 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: const Text('Login'),
             ),
-          ],
+        const SizedBox(height: 12.0),
+        RichText(
+          text: TextSpan(
+            text: 'Belum Memiliki Akun? ',
+            style: const TextStyle(color: Colors.black),
+            children: <TextSpan>[
+              TextSpan(
+                text: ' Buat Akun',
+                style: const TextStyle(fontWeight: FontWeight.w600),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterPage()),
+                  ),
+              ),
+            ],
+          ),
         ),
+        ],
       ),
+    ),
     );
   }
 }
