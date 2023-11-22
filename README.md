@@ -164,9 +164,16 @@
     Bisa, dan datanya akan muncul sebagai jsonDecode. Namun, pengambilan data JSON tanpa membuat model terlebih dahulu tidak lebih baik daripada membuat model sebelum melakukan pengambilan data JSON karena data tidak diinisiasi secara langsung menjadi object dalam class model.
 2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
 
+    `CookieRequest` berfungsi untuk mengelola _cookie_ pada HTTP Request yang berkaitan dengan _session_ dan _authentication_. `CookieRequest` perlu untuk dibagikan ke semua komponen di aplikasi Flutter untuk mengelola keseluruhan aplikasi sehingga konsisten dan efisien.
 3. Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+    - Mengumpulkan data Django dan membuatnya dalam tampilan data JSON kemudian melakukan pemanggilan data dari _endpoint_ JSON tersebut. Data yang diterima akan berupa _data type_ `Map<String, dynamic>` untuk setiap _models_ setelah di-_parsing_ menggunakan `dart:convert`.
+    - Pada Flutter, data dari `Map` dikonversi menjadi sebuah _object_ dari _models_ yang sudah diinisiasi sebelumnya.
+    - Kemudian menggunakan `Provider`, data akan diolah dan ditampilkan dalam UI dalam bentuk `Text` (atau bentuk _widget_ lainnya). Flutter akan secara otomatis melakukan perubahan data sehingga tampilannya akan selalu _up-to-date_.
 
 4. Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+    - Pada Flutter, pertama-tama membuat form untuk autentikasi kemudian Flutter akan mengirimkan HTTP POST Request ke _endpoint_ Django dengan data autentikasi Django dalam bentuk JSON.
+    - Django akan mengirim respons ke Flutter (`200` jika berhasil), kemudian Flutter akan menyimpan _session cookie_ dari _authenticated user_ tersebut.
+    - Data yang ditampilkan pada Menu di Flutter akan sesuai dengan data milik _user_ tersebut.
 
 5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
     - `Align`: mensejajarkan posisi dengan _child_-nya dan membuat ukurannya sesuai dengan _child_-nya
@@ -195,5 +202,15 @@
     - Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
         Setelah berhasil menampilkan dan mengatur _routing_, menambahkan tombol untuk kembali ke `MyHomePage()` dengan menambahkan:
         ```
-
+        ...
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+              );
+            },
+            child: Icon(Icons.home),
+            tooltip: 'Back to Home',
+          ),
+        ...  
         ```

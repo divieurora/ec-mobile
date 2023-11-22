@@ -1,3 +1,4 @@
+import 'package:ec_mobile/widgets/inventory_card.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -95,6 +96,17 @@ class _ProductPageState extends State<ProductPage> {
                       ));
                 }
               }
-            }));
+            }
+            ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => MyHomePage()),
+                  );
+                },
+                child: Icon(Icons.home),
+                tooltip: 'Back to Home',
+              ),
+    );
   }
 }
